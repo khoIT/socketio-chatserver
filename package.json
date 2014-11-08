@@ -1,6 +1,6 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.1.2",
+  "name": "khoi-chat-server",
+  "version": "1.1",
   "description": "A chat server app",
   "main": "index.js",
   "scripts": {
