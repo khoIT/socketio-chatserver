@@ -1,6 +1,6 @@
 {
   "name": "khoi-chat-server",
-  "version": "1.1",
+  "version": "0.0.1",
   "description": "A chat server app",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "express": "~4.9.x",
-    "ejs": "~0.7.1",
     "socket.io": "~0.9.6"
   },
   "engines": {
