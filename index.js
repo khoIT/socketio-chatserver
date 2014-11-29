@@ -33,7 +33,7 @@ io.sockets.on('connection', function (socket) {
     // send client to room 1
     socket.join('mainRoom');
     // echo to client they've connected
-    socket.emit('updatechat', 'SERVER', 'you have connected to mainRom');
+    socket.emit('updatechat', 'SERVER', 'you have connected to mainRoom');
     // echo to room 1 that a person has connected to their room
     socket.broadcast.to('mainRoom').emit('updatechat', 'SERVER', username + ' has connected to this room');
     socket.emit('updaterooms', rooms, 'mainRoom');
