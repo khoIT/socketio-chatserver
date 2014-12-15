@@ -15,7 +15,7 @@ app.get('/', function (req, res) {
 
 // usernames which are currently connected to the chat
 var usernames = {};
-
+var numUsers = 0;
 // rooms which are currently available in chat
 var rooms = ['mainRoom'];
 
@@ -32,8 +32,9 @@ io.sockets.on('connection', function (socket) {
     // send client to room 1
     socket.join('mainRoom');
     // echo to client they've connected
-    socket.emit('updatechat', 'SERVER', 'you have connected to mainRoom');
-
+    //socket.emit('updatechat', 'SERVER', 'you have connected to mainRoom. There are currently ' + numUsers + 'in the room.');
+    // increase number of users
+    numUsers += 1;
     // echo to room 1 that a person has connected to their room
     socket.broadcast.to('mainRoom').emit('updatechat', 'SERVER', username + ' has connected to this room');
     socket.emit('updaterooms', rooms, 'mainRoom');
@@ -50,7 +51,8 @@ io.sockets.on('connection', function (socket) {
     socket.leave(socket.room);
     // join new room, received as function parameter
     socket.join(newroom);
-    socket.emit('updatechat', 'SERVER', 'you have connected to room: '+ newroom);
+    socket.emit('updatechat', 'SERVER', 'You have connected to room: '+ newroom + '. There are ' + numUsers + ' user(s).');
+
     // sent message to OLD room
     socket.broadcast.to(socket.room).emit('updatechat', 'SERVER', socket.username+' has left this room');
     // update socket session room title
@@ -72,5 +74,6 @@ io.sockets.on('connection', function (socket) {
     // echo globally that this client has left
     socket.broadcast.emit('updatechat', 'SERVER', socket.username + ' has disconnected');
     socket.leave(socket.room);
+    numUsers -= 1;
   });
 });
